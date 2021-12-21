@@ -13,6 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         
+        //Calling Login View As Initial View...
         Login()
             .environmentObject(realmManager)
     }

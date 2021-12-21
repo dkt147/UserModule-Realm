@@ -7,16 +7,26 @@
 
 import SwiftUI
 
-
+//Adding custom color...
 let lightGray = Color(red:239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0)
+
+
 struct Login: View {
+    
+    //Variable for alert...
     @State private var showAlert = false
     @State private var AddSignup = false
+    
+    //Environment variable for realm database...
     @EnvironmentObject var realmManager : RealmManager
+    
+    //Variable to get the value from textfields...
     @State private var email:String = ""
     @State private var password:String = ""
     
     var body: some View {
+        
+        //Body of Login Page...
         VStack(spacing:20){
             Image("logo")
                 .resizable()
@@ -58,13 +68,15 @@ struct Login: View {
             }
             
             Button{
+                
+                //Calling login funciton on tap...
                 if email != ""
                 {
                     realmManager.loginUser(email: email, password: password)
                     
                 }
                 
-                
+                //Setting fields to empty again...
                 email = ""
                 password = ""
             }
@@ -81,6 +93,7 @@ struct Login: View {
             HStack{
                 Text("Don't have an account?")
                 Button{
+                    //Opening signup page on click as a popup sheet...
                     AddSignup.toggle()
                 }label: {
                     Text("Sign up now!")

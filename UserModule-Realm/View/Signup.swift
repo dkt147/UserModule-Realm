@@ -10,28 +10,34 @@ import SwiftUI
 
 struct Signup: View {
 
+    //Environment variable for realm database...
     @EnvironmentObject var realmManager : RealmManager
+    
+    //Variable to get the value from textfields...
     @State private var name:String = ""
     @State private var email:String = ""
     @State private var password:String = ""
     @State private var depart:String = ""
     
+    //Variable to dismiss the signup page...
     @Environment (\.dismiss) var dismiss
     
     
     var body: some View {
+        
+        //Body of Signup Page...
         VStack(spacing:20){
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode:.fill)
                 .frame(width: 100, height: 100)
                 .padding(.bottom,20)
-                .padding(.top,20)
+                .padding(.top,50)
             Text("Signup")
                 .fontWeight(.heavy)
                 .font(.title2)
                 .frame(alignment:.leading)
-                .padding(.trailing,250)
+                .padding(.trailing,230)
                 .padding(.bottom,10)
             
             TextField("Full Name", text: $name)
@@ -70,17 +76,20 @@ struct Signup: View {
             
            
             Button{
+                
+                //Calling Add User Function...
                 if name != ""
                 {
                     realmManager.addUser(UserName: name, UserEmail: email, UserPassword: password, UserDepart: depart)
                     
                 }
-                
+                //Setting fields to empty again...
                 name = ""
                 email = ""
                 password = ""
                 depart = ""
                 
+                //Dismiss function to dismiss the pop up...
                 dismiss()
             }label: {
                 Text("Signup")
@@ -99,7 +108,7 @@ struct Signup: View {
                     Text("Login now!")
                         .foregroundColor(.green)
                 }
-            }.padding(.top, 100)
+            }
                 Spacer()
         }.padding()
         .padding()
