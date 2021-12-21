@@ -16,6 +16,8 @@ struct Signup: View {
     @State private var password:String = ""
     @State private var depart:String = ""
     
+    @Environment (\.dismiss) var dismiss
+    
     
     var body: some View {
         VStack(spacing:20){
@@ -78,6 +80,8 @@ struct Signup: View {
                 email = ""
                 password = ""
                 depart = ""
+                
+                dismiss()
             }label: {
                 Text("Signup")
                     .frame(width: 280, height: 45)

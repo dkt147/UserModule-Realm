@@ -66,6 +66,8 @@ class RealmManager: ObservableObject{
     
                     try localRealm.write{
                         print("Login Success")
+                        let msg = 1
+                       
                     }
                 }catch{
                     print("Login Failed \(error)")

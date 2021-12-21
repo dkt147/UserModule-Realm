@@ -10,7 +10,8 @@ import SwiftUI
 
 let lightGray = Color(red:239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0)
 struct Login: View {
-    
+    @State private var showAlert = false
+    @State private var AddSignup = false
     @EnvironmentObject var realmManager : RealmManager
     @State private var email:String = ""
     @State private var password:String = ""
@@ -22,7 +23,7 @@ struct Login: View {
                 .aspectRatio(contentMode:.fill)
                 .frame(width: 100, height: 100)
                 .padding(.bottom,20)
-                .padding(.top,20)
+                .padding(.top,40)
             Text("Login")
                 .fontWeight(.heavy)
                 .font(.title2)
@@ -53,7 +54,7 @@ struct Login: View {
             }label: {
                 Text("Forgot Password?")
                     .foregroundColor(.green)
-                    .padding(.leading,180)
+                    .padding(.leading,160)
             }
             
             Button{
@@ -62,9 +63,12 @@ struct Login: View {
                     realmManager.loginUser(email: email, password: password)
                     
                 }
+                
+                
                 email = ""
                 password = ""
-            }label: {
+            }
+        label: {
                 Text("Login")
                     .frame(width: 280, height: 45)
                     .foregroundColor(.white)
@@ -73,15 +77,21 @@ struct Login: View {
                 .font(.title3)
             }.padding(.top,20)
             
+            
             HStack{
                 Text("Don't have an account?")
                 Button{
-                    print("Signup OK")
+                    AddSignup.toggle()
                 }label: {
                     Text("Sign up now!")
                         .foregroundColor(.green)
+                }.sheet(isPresented: $AddSignup)
+                {
+                    Signup()
+                        .environmentObject(realmManager)
+
                 }
-            }.padding(.top, 240)
+            }.padding(.top, 100)
                 Spacer()
         }.padding()
         .padding()
